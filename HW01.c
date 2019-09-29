@@ -80,23 +80,12 @@ int calcSquarEq(double a, double b, double c, double *x1, double *x2)
 void printAge(int age)
 {
     if((age >= MIN_AGE) && (age <= MAX_AGE)) {
-        if((age%100 >= 11) && (age%100 <= 14))
-            printf("%d let.", age);
+        if(((age/10)%10 != 1) && (age%10 == 1))
+            printf("%d god.", age);
+        else if (((age/10)%10 != 1) && ((age%10 >= 2) && (age%10 <= 4)))
+            printf("%d goda.", age);
         else
-            switch (age%10) {
-            case 0: case 5: case 6: case 7: case 8: case 9:
-                printf("%d let.", age);
-                break;
-            case 2: case 3: case 4:
-                printf("%d goda.", age);
-                break;
-            case 1:
-                printf("%d god.", age);
-                break;
-            default:
-                perror("Unknown error in function printAge(..).\n");
-                break;
-            }//switch (age%10)
+            printf("%d let.", age);
     }//if((age >= MIN_AGE) && (age <= MAX_AGE))
 }//void printAge(int age)
 
@@ -110,16 +99,16 @@ int isOneColor(int X1, int Y1, int X2, int Y2)
 }//int isOneColor(int X1, int Y1, int X2, int Y2)
 
 /*********************** Ex. 9 ****************************/
-void division(int *N, int *K)
-{//возвращает остаток от деления (N) и частное (K) от деления нацело N на K
+void division(int *N, int *K, int *quotient, int *remaimder)
+{//возвращает остаток от деления (remaimder) и частное (quotient) от деления нацело N на K
     if (*N < *K) mySwap(N, K);
     int d = *K, count = 0;
     for (count = 0; d <= *N; ++count)
         d += *K;
     d -= *K;
-    *N -= d;
-    *K = count;
-}//void division(int *N, int *K)
+    *remaimder = *N - d;
+    *quotient = count;
+}//void division(int *N, int *K, int *quotient, int *remaimder)
 
 /*********************** Ex. 10 ***************************/
 int isOddNumder(int numb)
@@ -201,7 +190,7 @@ printf("\n\n");
 
 printf("********************** Ex. 6 ***************************\n\n");
     int age = 11;
-    printAge(age);
+        printAge(age);
 printf("\n\n");
 
 printf("********************** Ex. 7 ***************************\n\n");
@@ -215,9 +204,9 @@ printf("\n\n");
 printf("********************** Ex. 9 ***************************\n\n");
     x = 12;
     y = 3;
-    division(&x, &y);
-    printf("Privat: %d\n", y);
-    printf("Rest: %d", x);
+    int q = 0, r = 0;
+    division(&x, &y, &q, &r);
+    printf("%d/%d = %d\nRest: %d\n", x, y, q, r);
 printf("\n\n");
 
 printf("********************** Ex. 10 **************************\n\n");
@@ -236,3 +225,4 @@ printf("\n\n");
 
     return 0;
 }//int main()
+
