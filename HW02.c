@@ -65,7 +65,8 @@ long myPowc(int a, int b)
 /*********************** Ex. 3 ****************************/
 U cC(U s, U e)//calcCounter
 {//s - start, e - end
-    return (s > e/2)?1:cC(s+1, e)+cC(s << 1, e);
+    if (s > e/2) return 1;
+    else return cC(s+1, e)+cC(s << 1, e);
 }//U cC(U s, U e)
 
 int main()
